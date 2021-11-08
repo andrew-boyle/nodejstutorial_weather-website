@@ -2,8 +2,6 @@
 // Here we pull from the API we already set up.
 // Therefore, this isn't node.js it's javascript for a browser.
 
-console.log('Client side javascript file is loaded');
-
 // fetch('https://puzzle.mead.io/puzzle')
 //    .then((response) => {
 //       response.json().then((data) => {
