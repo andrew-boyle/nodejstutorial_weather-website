@@ -10,6 +10,8 @@ const forecast = require('./utils/forecast');
 
 // initialize express
 const app = express();
+// Port from Heroku (or 3000 if local host)
+const port = process.env.PORT || 3000
 
 // node.js path
 // https://nodejs.org/dist/latest-v17.x/docs/api/path.html
@@ -113,7 +115,7 @@ app.get('*', (req, res) => {
 })
 
 
-// to start server (port 3000)
-app.listen(3000, () => {
-   console.log('Server is up on port 3000.');
+// start server
+app.listen(port, () => {
+   console.log(`Server is up on port ${port}.`);
 });
