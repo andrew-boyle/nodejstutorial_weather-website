@@ -1,0 +1,24 @@
+{{!-- Photo from unsplash: https://unsplash.com/photos/Vy2cHqm0mCs (Romson Preechawit--}}
+{{!-- Photo from unsplash: https://unsplash.com/photos/FKqxZ58bVjU (Ryunosuke Kikuno) --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/styles.css">
+   <title>Weather | 404</title>
+   <link rel="icon" href="/img/weather.png">
+</head>
+<body>
+   <div class="main-content">
+      {{>header}}
+      <img class="error" src={{image}}>
+      <p>{{errorMsg}}</p>
+   </div>
+
+   {{>footer}}
+
+</body>
+</html>
