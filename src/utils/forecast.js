@@ -1,32 +1,35 @@
 /**
- * Dark Sky is no longer available, so Andrew suggests using weatherstack.  
+ * Dark Sky is no longer available, and weatherstack limits to 250 calls and I've run out.  
+ * So I'm switching to openweathermap.org.    
  * 
- * @api https://weatherstack.com/
- * @key e32a515b79cfff0c8560949ee428e697
- * @baseurl http://api.weatherstack.com/
- * @documentation https://weatherstack.com/documentation
+ * @api https://openweathermap.org/
+ * @key e15ca4378bd449b1a4770091b44ef365
+ * @exampleurl https://api.openweathermap.org/data/2.5/weather?appid=e15ca4378bd449b1a4770091b44ef365&units=imperial&lat=35&lon=139
+ * @documentation https://openweathermap.org/current
+ * @username andrew-boyle
+ * @email andrew.boyle@live.com
  * 
  */
 
 const request = require("request");
 
 const forecast = (latitude, longitude, callback) => {
-   const rootURL = 'http://api.weatherstack.com/current?access_key=e32a515b79cfff0c8560949ee428e697&query=';
-   // units parameter  m: metric; s: scientific; f: fahrenheit(imperial)
-   const units = 'f';
-   const url = `${rootURL}${latitude},${longitude}&units=${units}`;
+   const rootURL = 'https://api.openweathermap.org/data/2.5/weather?appid=e15ca4378bd449b1a4770091b44ef365';
+   const units = 'imperial';
+   const url = `${rootURL}&units=${units}&lat=${latitude}&lon=${longitude}`;
       
    // note deconstruct response into {body} as thats the only property needed.
    request({ url, json: true }, (error, {body}) => {
       if(error) {
          callback('Unable to connect to weather service.')
-      } else if (body.error) {
-         callback(`Forecast Server Error: ${body.error.info}`)
+      } else if (body.message) {
+         callback(`Forecast Server Error: ${body.message}`)
       } else {
          callback(undefined, {
-            temp: body.current.temperature,
-            feelsLike: body.current.feelslike,
-            description:body.current.weather_descriptions[0]
+            temp: Math.round(body.main.temp),
+            feelsLike: Math.round(body.main.feels_like),
+            humidity: body.main.humidity,
+            description: body.weather[0].description
          })
       }
    });
